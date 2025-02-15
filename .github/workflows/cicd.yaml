@@ -24,13 +24,13 @@ jobs:
       - name: Publish image to dockerhub
         run: docker push barburon/aws-test:latest
 
-deploy:
-  needs: build
-  runs-on: [aws-ec2]
-  steps:
-    - name: Pull image from dockerhub
-      run: docker pull barburon/aws-test
-    - name: Delete old container
-      run: docker rm -f aws-test
-    - name: Run docker container
-      run: docker run -d -p 8080:8080 --name aws-test barburon/aws-test
+  deploy:
+   needs: build
+   runs-on: [aws-ec2]
+   steps:
+     - name: Pull image from dockerhub
+       run: docker pull barburon/aws-test
+     - name: Delete old container
+       run: docker rm -f aws-test
+     - name: Run docker container
+       run: docker run -d -p 8080:8080 --name aws-test barburon/aws-test
